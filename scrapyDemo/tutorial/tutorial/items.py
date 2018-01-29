@@ -13,4 +13,3 @@ class TutorialItem(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field()
     link = scrapy.Field()
-    desc = scrapy.Field()
