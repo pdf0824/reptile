@@ -1,4 +1,5 @@
-# coding = utf-8
+# coding=utf-8
+
 from scrapy import cmdline
 
 if "__main__" == __name__:
@@ -6,5 +7,5 @@ if "__main__" == __name__:
     # file_name = input("请输入保存的文件名字:")
     # command = "scrapy crawl " + name + " -o " + file_name
     # cmdline.execute(command.split())
-    command = "scrapy crawl " + 'yaohuo' + " -o " + 're.json'
+    command = "scrapy crawl tencent"
     cmdline.execute(command.split())

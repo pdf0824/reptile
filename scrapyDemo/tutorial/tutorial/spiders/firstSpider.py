@@ -1,10 +1,13 @@
 import scrapy
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
 
-class DemoSpider(scrapy.Spider):
+
+class DemoSpider(CrawlSpider):
     name = "demo"
-    # allowed_domains = ["morvanzhou.github.io"]
+    allowed_domains = ["morvanzhou.github.io"]
     start_urls = [
-         'https://morvanzhou.github.io/',
+        'https://morvanzhou.github.io/',
         'http://www.baidu.com/',
     ]
 
