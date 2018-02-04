@@ -10,6 +10,7 @@ import json
 class TencentPipeline(object):
     def __init__(self):
         self.f = open("../data.json", 'wb')
+        self.f.write("[\n".encode("utf-8"))
 
     def process_item(self, item, spider):
         result = json.dumps(dict(item), ensure_ascii=False) + ",\n"
@@ -17,4 +18,5 @@ class TencentPipeline(object):
         return item
 
     def close_spider(self, spider):
+        self.f.write("]".encode("utf-8"))
         self.f.close()
