@@ -13,3 +13,6 @@ class TutorialItem(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field()
     link = scrapy.Field()
+    author = scrapy.Field()
+    body = scrapy.Field()
+    isRou = scrapy.Field()
