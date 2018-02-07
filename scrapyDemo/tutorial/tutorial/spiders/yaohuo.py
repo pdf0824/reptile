@@ -61,7 +61,7 @@ class YaoHuoDemo(scrapy.Spider):
 
         next_page = base_url + response.xpath("//div[@class='bt2']/a[1]/@href").extract()[0]
         global page_count
-        if page_count < 5:
+        if page_count < 2:
             yield scrapy.Request(next_page, callback=self.parse_web)
             page_count += 1
         else:
@@ -75,7 +75,8 @@ class YaoHuoDemo(scrapy.Spider):
 
     def parse_detail(self, response):
         item = response.meta['item']
-        item['body'] = response.xpath("//div[@class='bbscontent']/(text() | a/text())").extract()[0]
+        item['body'] = \
+            response.xpath("//div[@class='bbscontent']/text() | //div[@class='bbscontent']/a/text()").extract()[0]
         item['isRou'] = response.xpath("//div[@class='content']/text()[1]").extract()[0]
         if item["isRou"][0] == "礼":
             var1, var2 = item["isRou"].split()
@@ -85,14 +86,14 @@ class YaoHuoDemo(scrapy.Spider):
             re_url = response.xpath("//form/@action").extract()[0]
             form_data = {
                 'face': "",
-                'sendmsg': 0,
+                'sendmsg': "0",
                 'action': 'add',
-                'id': response.xpath("//form/input[@name='id']/@value").extract()[0],
-                'siteid': response.xpath("//form/input[@name='siteid']/@value").extract()[0],
-                'lpage': response.xpath("//form/input[@name='lpage']/@value").extract()[0],
-                'classid': response.xpath("//form/input[@name='classid']/@value").extract()[0],
-                'sid': response.xpath("//form/input[@name='sid']/@value").extract()[0],
-                'g': response.xpath("//form/input[@name='g']/@value").extract()[0],
+                'id': str(response.xpath("//form/input[@name='id']/@value").extract()[0]),
+                'siteid': str(response.xpath("//form/input[@name='siteid']/@value").extract()[0]),
+                'lpage': str(response.xpath("//form/input[@name='lpage']/@value").extract()[0]),
+                'classid': str(response.xpath("//form/input[@name='classid']/@value").extract()[0]),
+                'sid': str(response.xpath("//form/input[@name='sid']/@value").extract()[0]),
+                'g': str(response.xpath("//form/input[@name='g']/@value").extract()[0]),
                 'content': ""
             }
             if total - surplus > once:
